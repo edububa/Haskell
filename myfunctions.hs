@@ -21,7 +21,10 @@ myButLast (x:xs) =
 elementAt :: [a] -> Int -> a
 elementAt [] _ = error "Index out of bounds!"
 elementAt (x:_) 1 = x
-elementAt (x:xs) i = elementAt xs (i - 1)
+elementAt (x:xs) i =
+  if i <= 0 then error "Index out of bounds!"
+                 
+  else elementAt xs (i - 1)
 
 -- Problem 4: Find the number of elements of a list.
 
@@ -45,3 +48,4 @@ isPalindrome xs = xs == myReverse xs
 -- Problem 7: Flatten a nested list structure.
 -- Transform a list, possibly holding lists as elements into a `flat' list by replacing each list with
 -- its elements (recursively).
+
