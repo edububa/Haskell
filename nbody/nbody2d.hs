@@ -1,5 +1,3 @@
-import Graphics.SpriteKit
-
 type DoubleF = (Float,Float)
 
 mul :: Float -> DoubleF -> DoubleF
@@ -24,5 +22,5 @@ bodyForce :: [DoubleF] -> [DoubleF] -> Float -> [DoubleF]
 bodyForce ps vs dt = zipWith tsum vs (map oneparticlev ps)
   where oneparticlev = \x -> mul dt (foldr tsum (0,0) (map (vforce x) ps))
 
-integrate :: [DoubleF] -> [Dou bleF] -> Float -> [DoubleF]
+integrate :: [DoubleF] -> [DoubleF] -> Float -> [DoubleF]
 integrate ps vs dt = zipWith tsum ps (map (mul dt) vs)
