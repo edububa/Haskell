@@ -12,8 +12,7 @@ reversenumberaux x n =
   if (n - 1) == 0 then x
   else (mod x 10) * 10 ^ (n - 1) + reversenumberaux (div x 10) (n - 1)
 
-
-
+-- other implementation
 reversenumberf :: Int -> Int
 reversenumberf x =
   foldr (+) (0) (zipWith (*) (reverse (map (10^) [0..((length (splitrevnumber x)) - 1)])) (splitrevnumber x))

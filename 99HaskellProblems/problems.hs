@@ -4,8 +4,8 @@ myLast []     = error "no end for empty list"
 myLast [x]    = x
 myLast (_:xs) = myLast xs
 
-myLast2 :: [a] -> a
-myLast2 xs = head (reverse xs)
+myLast' :: [a] -> a
+myLast' xs = head (reverse xs)
 
 -- Problem 2
 myButLast :: [a] -> a
@@ -21,3 +21,28 @@ elementAt xs y =
   else elementAt (tail xs) (y - 1)
 
 -- Problem 4
+myLength :: [a] -> Int
+myLength []     = 0
+myLength (x:xs) = 1 + myLength(xs)
+
+myLength' :: [a] -> Int
+myLength' xs = foldr (const (+1)) 0 xs
+
+-- Problem 5
+myReverse :: [a] -> [a]
+myReverse []     = []
+myReverse (x:xs) = (myReverse xs) ++ [x]
+
+-- Problem 6
+isPalindrome :: Eq a => [a] -> Bool
+isPalindrome xs = xs == (reverse xs)
+
+-- Problem 7
+
+
+-- Problem 8
+
+-- Problem 9
+
+-- Problem 10
+
