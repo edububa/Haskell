@@ -1,10 +1,8 @@
 matrixmul :: [[Float]] -> [[Float]] -> [[Float]]
-matrixmul xs ys = map mulRow xs
-  where mulRow = \x -> map (dotprod x) (transpose ys)
-  
+matrixmul xs ys = map (\x -> map (dotprod x) (transpose ys)) xs
+
 transpose :: [[a]] -> [[a]]
-transpose xs = foldr (zipWith (:)) (emptyColumn (length (head xs))) xs
-  where emptyColumn = \x -> map (const []) [1..x]
+transpose xs = foldr (zipWith (:)) (map (const []) [1..(length xs)]) xs 
           
 dotprod :: [Float] -> [Float] -> Float
-dotprod xs ys = foldr (+) 0 (zipWith (*) xs ys)
+dotprod xs ys = foldr (+) 0 $ zipWith (*) xs ys
