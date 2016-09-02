@@ -1,4 +1,3 @@
-import Data.Char
 import Control.Monad
 
 indexList :: String -> [(Int, String)]
