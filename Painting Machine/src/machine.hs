@@ -10,13 +10,13 @@ lineStarts :: String -> [Int]
 lineStarts xs = if head xs == '#' then 0 : f xs else f xs
   where
     start = \x -> x /= [] && length x > 1 && head x == '.' && head (tail x) == '#'
-    f     = \x -> foldr (\x acc -> if start (snd x) then (fst x + 1) : acc else acc) [] $ indexList x
+    f     = \x -> foldr (\(n,s) acc -> if start s then n + 1 : acc else acc) [] $ indexList x
 
 lineEnds :: String -> [Int]
 lineEnds xs = if last xs == '#' then g xs ++ [length xs - 1] else g xs
   where
     end = \x -> x /= [] && length x > 1 && head x == '#' && head (tail x) == '.'
-    g   = \x -> foldr (\x acc -> if end (snd x) then (fst x) : acc else acc) [] $ indexList x
+    g   = \x -> foldr (\(n,s) acc -> if end s then n : acc else acc) [] $ indexList x
 
 lineAnalyzer :: String -> [(Int,Int)]
 lineAnalyzer xs = zip (lineStarts xs) (lineEnds xs)
