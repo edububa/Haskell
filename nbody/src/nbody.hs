@@ -1,12 +1,19 @@
 import Forces.ThreeD
 
-bodyForce :: [Force] -> [Force] -> Float -> [Force]
-bodyForce ps vs dt = zipWith vectsum vs (map oneparticlev ps)
-  where oneparticlev = \x -> mul dt $ foldr1 vectsum $ map (vforce x) ps
+bodyForce :: ([Force], [Force], Float) -> ([Force], [Force], Float)
+bodyForce (ps, vs, dt) = (ps, newForce, dt)
+  where
+    oneparticlev = \x -> mul dt $ foldr1 vectsum $ map (vforce x) ps
+    newForce     = zipWith vectsum vs (map oneparticlev ps)
 
-integrate :: [Force] -> [Force] -> Float -> [Force]
-integrate ps vs dt = zipWith vectsum ps $ map (mul dt) vs
+integrate :: ([Force], [Force], Float) -> ([Force], [Force], Float)
+integrate (ps,vs,dt) = (newPos, vs, dt)
+  where newPos = zipWith vectsum ps $ map (mul dt) vs
 
+iterations :: Int -> [Force] -> [Force] -> Float -> [([Force], [Force], Float)]
+iterations n ps vs dt = take n $ iterate (integrate . bodyForce) (ps, vs, dt)
+
+main :: IO ()
 main = do
   input <- getLine
   let xs = words input
@@ -17,5 +24,5 @@ main = do
   vi <- sequence $ map (const getLine) [1..n]
   let ps = map toForce pi
       vs = map toForce vi
-  print $ ps
+  print $ iterations 10000 ps vs dt
   return ()

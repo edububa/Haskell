@@ -1,10 +1,7 @@
 module Forces.TwoD
-  ( mul
-  , vectsum
-  , distance
-  , vforce
-  , Force
-  , toForce
+  ( mul, vectsum
+  , distance, vforce
+  , Force, toForce
   ) where
 
 type Force = (Float,Float)
@@ -27,6 +24,8 @@ vforce p1@(x1,x2) p2@(y1,y2)
         v1    = y1 - x1
         v2    = y2 - x2
 
-toForce :: String -> Force
-toForce xs = (head l, last l)
+toForce :: String -> Maybe Force
+toForce xs
+  | (length l) /= 2 = Nothing
+  | otherwise = Just (head l, last l)
   where l = map read $ words xs :: [Float]

@@ -1,10 +1,7 @@
 module Forces.ThreeD
-  ( mul
-  , vectsum
-  , distance
-  , vforce
-  , Force
-  , toForce
+  ( mul, vectsum
+  , distance, vforce
+  , Force, toForce
   ) where
 
 type Force = (Float,Float,Float)
