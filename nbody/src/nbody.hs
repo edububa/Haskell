@@ -13,16 +13,19 @@ integrate (ps,vs,dt) = (newPos, vs, dt)
 iterations :: Int -> [Force] -> [Force] -> Float -> [([Force], [Force], Float)]
 iterations n ps vs dt = take n $ iterate (integrate . bodyForce) (ps, vs, dt)
 
+positions :: [([Force], [Force], Float)] -> [[Force]]
+positions xs = foldr (\(ps,_,_) acc -> ps : acc) [] xs
+
 main :: IO ()
 main = do
   input <- getLine
   let xs = words input
       n  = read $ head xs :: Int
       dt = read $ head $ tail xs :: Float
-      i  = read $ head $ tail $ tail xs :: Float
+      i  = read $ head $ tail $ tail xs :: Int
   pi <- sequence $ map (const getLine) [1..n]
   vi <- sequence $ map (const getLine) [1..n]
   let ps = map toForce pi
       vs = map toForce vi
-  print $ iterations 10000 ps vs dt
+  print $ positions $ iterations i ps vs dt
   return ()

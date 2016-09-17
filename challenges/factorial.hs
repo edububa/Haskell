@@ -1,3 +1,4 @@
+import Data.List
 -- challenge 80: Factorial
 --- recursive version
 factorialrec :: Integer -> Integer
@@ -9,4 +10,4 @@ factorialtailrec x y = if x <= 1 then y else factorialtailrec (x - 1) (y * x)
 
 --- nonrecursive version
 factorial :: Integer -> Integer
-factorial x = foldr (*) (1) [1..x]
+factorial x = foldl' (*) 1 [1..x]

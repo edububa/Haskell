@@ -6,8 +6,8 @@ splitNetworkOct xs =
   if length xs > 15 then error "IP no valida"
   else 
 
-network :: [Char] -> [Char]
-network xs = xs
+network :: [Int] -> Int -> [Int]
+network ip m = ip
 
 broadcast :: [Char] -> [Char]
 broadcast xs = xs
